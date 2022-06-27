@@ -19,6 +19,8 @@ public class GunMechanic : MonoBehaviour
 
     private float fireRate = 2.5f;
     private float nextTimeToFire = 0;
+    RaycastHit tap;
+
 
     private void Awake()
     {
@@ -34,20 +36,16 @@ public class GunMechanic : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < Input.touchCount; i++)
+        if (Input.touchCount > 0 || Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.touches[i].position);
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
-            RaycastHit2D tap = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.zero), 10f);
-            if(tap)
+            Debug.DrawRay(ray.origin, ray.direction * 20f, Color.green);
+
+            if (Physics.Raycast(ray, out tap, Mathf.Infinity))
             {
-                Debug.Log("You've tapped " + tap.transform.name);
+                tap2Aim=!tap2Aim;
             }
-
-
-
-            //Debug.Log(touchPos);
-            Debug.DrawLine(transform.position, touchPos, Color.green);
         }
 
         //Aiming
@@ -63,7 +61,7 @@ public class GunMechanic : MonoBehaviour
 
     void Aim()
     {
-        if (tap2Aim != true)
+        if (!tap2Aim)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             float shortestDistance = Mathf.Infinity;
@@ -88,9 +86,10 @@ public class GunMechanic : MonoBehaviour
                 target = null;
             }
         }
-        else if (tap2Aim == true)
+        else if (tap2Aim)
         {
-            Debug.Log("stop touch my face");
+            target = tap.transform.GetComponent<Transform>();
+            Debug.Log("You've tapped " + tap.collider.name);
         }
 
     }
