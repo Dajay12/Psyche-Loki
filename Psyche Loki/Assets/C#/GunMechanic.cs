@@ -5,15 +5,15 @@ public class GunMechanic : MonoBehaviour
     public PlayerHealth refToHealth;
     GameObject Player;
 
-    Transform target;
+     Transform target;
     private float speed = 45f;
 
     public Transform firePoint;
     public GameObject bulletPrefab;
     //float bulletForce;
 
-    [Range(0, 6)]
-    public int sphereRange;
+    [Range(0, 10)]
+    public float sphereRange;
 
     [SerializeField] bool tap2Aim;
 
@@ -44,7 +44,7 @@ public class GunMechanic : MonoBehaviour
 
             if (Physics.Raycast(ray, out tap, Mathf.Infinity))
             {
-                tap2Aim=!tap2Aim;
+                tap2Aim = !tap2Aim;
             }
         }
 
@@ -56,7 +56,6 @@ public class GunMechanic : MonoBehaviour
 
         if (target == null)
             return;
-
     }
 
     void Aim()
@@ -88,10 +87,16 @@ public class GunMechanic : MonoBehaviour
         }
         else if (tap2Aim)
         {
-            target = tap.transform.GetComponent<Transform>();
-            Debug.Log("You've tapped " + tap.collider.name);
-        }
+            if (target != null)
+            {
+                target = tap.transform.GetComponent<Transform>();
+                Debug.Log("currently aiming at " + tap.collider.name);
 
+                if (Vector2.Distance(Player.transform.position, target.position) < 15f) { }
+                else tap2Aim = false;
+            }
+            else tap2Aim = false;
+        }
     }
 
     public void Shoot()
@@ -110,7 +115,7 @@ public class GunMechanic : MonoBehaviour
                 //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
                 //Raycasting bullets
-                RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, transform.TransformDirection(Vector2.right), 6f);
+                RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, transform.TransformDirection(Vector2.right), 17f);
                 if (hit)
                 {
                     Debug.Log("hit " + hit.collider.name);
