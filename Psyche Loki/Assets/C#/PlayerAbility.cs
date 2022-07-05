@@ -4,10 +4,13 @@ public class PlayerAbility : MonoBehaviour
 {
     public PlayerTopDown refToPlayer;
     public PlayerHealth refToHealth;
+    public Transform storage;
 
     [SerializeField] public enum AbilityUse { None, Invincibility, Restrain, BioExplosion }
     [SerializeField] public AbilityUse abilityUse;
     [SerializeField] private bool ability;
+    [SerializeField] bool swapped;
+    public bool occupied;
 
     private float nextFireTime = 0;
 
@@ -39,9 +42,21 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
-        Invincibility();
-        Restrain();
-        Explosion();
+        switch (abilityUse)
+        {
+            default:
+                abilityUse = AbilityUse.None;
+                break;
+            case AbilityUse.Invincibility:
+                Invincibility();
+                break;
+            case AbilityUse.BioExplosion:
+                Explosion();
+                break;
+            case AbilityUse.Restrain:
+                Restrain();
+                break;
+        }
     }
 
     void Invincibility()
@@ -63,7 +78,7 @@ public class PlayerAbility : MonoBehaviour
                 else
                 {
                     refToHealth.alive = true;
-                    //GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
+                    GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
                 }
             }
         }
@@ -94,7 +109,7 @@ public class PlayerAbility : MonoBehaviour
                 }
                 else
                 {
-                    //GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
+                    GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
                     foreach (GameObject tagged in taggedObjects)
                     {
                         //enable the enemies movement script
@@ -120,7 +135,7 @@ public class PlayerAbility : MonoBehaviour
             else
             {
                 explosiveActivate = false;
-                //GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
+                GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
             }
 
             if (explosiveActivate == true)
@@ -146,6 +161,8 @@ public class PlayerAbility : MonoBehaviour
 
     public void AbilityAtivate()
     {
-        if (abilityUse != AbilityUse.None) ability = true;
+        if (abilityUse != AbilityUse.None) { 
+            ability = true; 
+        }
     }
 }

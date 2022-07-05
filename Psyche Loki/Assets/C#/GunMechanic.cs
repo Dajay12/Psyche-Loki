@@ -115,7 +115,7 @@ public class GunMechanic : MonoBehaviour
                 //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
                 //Raycasting bullets
-                RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, transform.TransformDirection(Vector2.right), 17f);
+                RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, transform.TransformDirection(Vector2.right), 15f);
                 if (hit)
                 {
                     Debug.Log("hit " + hit.collider.name);

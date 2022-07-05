@@ -9,6 +9,8 @@ public class AbilityPill : MonoBehaviour
     public enum Abilities { Invicinble, BioExplosion, Restrain, None }
     public Abilities typesOfAblities;
 
+    public bool follow;
+
     void Awake()
     {
         refToAbility = player.GetComponent<PlayerAbility>();
@@ -18,20 +20,18 @@ public class AbilityPill : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            follow = true;
             if (typesOfAblities == Abilities.Invicinble)
             {
-                print("I");
                 refToAbility.abilityUse = PlayerAbility.AbilityUse.Invincibility;
             }
             if (typesOfAblities == Abilities.BioExplosion)
             {
-                print("F");
                 refToAbility.abilityUse = PlayerAbility.AbilityUse.BioExplosion;
             }
             if (typesOfAblities == Abilities.Restrain)
             {
-                print("R");
                 refToAbility.abilityUse = PlayerAbility.AbilityUse.Restrain;
             }
         }
@@ -44,6 +44,10 @@ public class AbilityPill : MonoBehaviour
 
     void Update()
     {
-        
+        if (refToAbility.abilityUse != PlayerAbility.AbilityUse.None && follow)
+        {
+            this.transform.position = refToAbility.storage.position;
+            refToAbility.occupied = true;
+        }
     }
 }

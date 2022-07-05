@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 278632872726454741}
   - component: {fileID: 278632872726454569}
   - component: {fileID: 278632872726454743}
-  - component: {fileID: 3235867370546377177}
   - component: {fileID: 278632872726454570}
+  - component: {fileID: 3235867370546377177}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -65,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 23763050}
   - {fileID: 6695786472153817091}
+  - {fileID: 8362865056877292525}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -172,32 +173,6 @@ MonoBehaviour:
   joystick: {fileID: 0}
   dodging: 0
   dodgePoint: {fileID: 23763050}
---- !u!114 &3235867370546377177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278632872726454740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6004a7b0941cb04383ce415ce9f574b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  refToPlayer: {fileID: 278632872726454743}
-  refToHealth: {fileID: 278632872726454570}
-  abilityUse: 3
-  ability: 0
-  invincibileTime: 10
-  restrainActivate: 0
-  restrainTime: 10
-  layerToHit:
-    serializedVersion: 2
-    m_Bits: 1
-  explodeTime: 3.5
-  explosiveActivate: 0
-  explosionRadius: 4.9
-  explosiveForce: 25
 --- !u!114 &278632872726454570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +201,33 @@ MonoBehaviour:
   fullHealth: {fileID: 21300000, guid: 6e1a128e00399874aacab776df08a4bb, type: 3}
   blankHealth: {fileID: 0}
   alive: 0
+--- !u!114 &3235867370546377177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278632872726454740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6004a7b0941cb04383ce415ce9f574b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refToPlayer: {fileID: 278632872726454743}
+  refToHealth: {fileID: 278632872726454570}
+  storage: {fileID: 8362865056877292525}
+  abilityUse: 3
+  ability: 0
+  swapped: 0
+  invincibileTime: 10
+  restrainTime: 10
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 1
+  explodeTime: 3.5
+  explosiveActivate: 0
+  explosionRadius: 4.9
+  explosiveForce: 25
 --- !u!1 &278632872810095609
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,8 +332,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
-    type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -356,10 +357,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refToHealth: {fileID: 278632872726454570}
   firePoint: {fileID: 278632872810095610}
-  bulletPrefab: {fileID: 6826459275917608700, guid: 58edd870f1f5197489dab5bae93b07d1,
-    type: 3}
-  sphereRange: 6
-  touch2Aim: 0
+  bulletPrefab: {fileID: 6826459275917608700, guid: 58edd870f1f5197489dab5bae93b07d1, type: 3}
+  sphereRange: 6.8
+  tap2Aim: 0
 --- !u!1 &2527305359481062363
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,8 +431,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3625043607559282579, guid: 577a18cc49365dc4b99d293f86c2feee,
-    type: 3}
+  m_Sprite: {fileID: 3625043607559282579, guid: 577a18cc49365dc4b99d293f86c2feee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -443,3 +442,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8230070187434257616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8362865056877292525}
+  m_Layer: 0
+  m_Name: Pill Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8362865056877292525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230070187434257616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.21, y: -0.87, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 278632872726454568}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
