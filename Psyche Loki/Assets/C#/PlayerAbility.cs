@@ -8,8 +8,8 @@ public class PlayerAbility : MonoBehaviour
 
     [SerializeField] public enum AbilityUse { None, Invincibility, Restrain, BioExplosion }
     [SerializeField] public AbilityUse abilityUse;
-    [SerializeField] private bool ability;
-    [SerializeField] bool swapped;
+    public bool ability;
+    public bool swapped;
     public bool occupied;
 
     private float nextFireTime = 0;
@@ -42,21 +42,25 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
-        switch (abilityUse)
+        if (!swapped)
         {
-            default:
-                abilityUse = AbilityUse.None;
-                break;
-            case AbilityUse.Invincibility:
-                Invincibility();
-                break;
-            case AbilityUse.BioExplosion:
-                Explosion();
-                break;
-            case AbilityUse.Restrain:
-                Restrain();
-                break;
+            switch (abilityUse)
+            {
+                default:
+                    abilityUse = AbilityUse.None;
+                    break;
+                case AbilityUse.Invincibility:
+                    Invincibility();
+                    break;
+                case AbilityUse.BioExplosion:
+                    Explosion();
+                    break;
+                case AbilityUse.Restrain:
+                    Restrain();
+                    break;
+            }
         }
+        Debug.Log(Time.time);
     }
 
     void Invincibility()
@@ -161,8 +165,13 @@ public class PlayerAbility : MonoBehaviour
 
     public void AbilityAtivate()
     {
-        if (abilityUse != AbilityUse.None) { 
-            ability = true; 
+        if (!swapped)
+        {
+            if (abilityUse != AbilityUse.None) ability = true;
+        }
+        else if (swapped)
+        {
+            ability = true;
         }
     }
 }

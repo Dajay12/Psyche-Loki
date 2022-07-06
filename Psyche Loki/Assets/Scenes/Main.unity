@@ -283,6 +283,7 @@ MonoBehaviour:
   refToAbility: {fileID: 0}
   player: {fileID: 420268948}
   typesOfAblities: 2
+  follow: 0
 --- !u!1 &167483456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,6 +3445,7 @@ MonoBehaviour:
   refToAbility: {fileID: 0}
   player: {fileID: 420268948}
   typesOfAblities: 0
+  follow: 0
 --- !u!1 &1446867181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,6 +5767,7 @@ MonoBehaviour:
   refToAbility: {fileID: 0}
   player: {fileID: 420268948}
   typesOfAblities: 1
+  follow: 0
 --- !u!1 &1576181730
 GameObject:
   m_ObjectHideFlags: 0
@@ -7013,6 +7016,7 @@ MonoBehaviour:
   refToAbility: {fileID: 0}
   player: {fileID: 420268948}
   typesOfAblities: 3
+  follow: 0
 --- !u!70 &2114473265
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

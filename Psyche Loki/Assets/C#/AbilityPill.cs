@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityPill : MonoBehaviour
@@ -16,30 +14,33 @@ public class AbilityPill : MonoBehaviour
         refToAbility = player.GetComponent<PlayerAbility>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             //gameObject.SetActive(false);
-            follow = true;
-            if (typesOfAblities == Abilities.Invicinble)
+
+            if (!refToAbility.occupied)
             {
-                refToAbility.abilityUse = PlayerAbility.AbilityUse.Invincibility;
+                follow = true;
+
+                if (typesOfAblities == Abilities.Invicinble) refToAbility.abilityUse = PlayerAbility.AbilityUse.Invincibility;
+                if (typesOfAblities == Abilities.BioExplosion) refToAbility.abilityUse = PlayerAbility.AbilityUse.BioExplosion;    
+                if (typesOfAblities == Abilities.Restrain) refToAbility.abilityUse = PlayerAbility.AbilityUse.Restrain;
             }
-            if (typesOfAblities == Abilities.BioExplosion)
+            else if (refToAbility.occupied)
             {
-                refToAbility.abilityUse = PlayerAbility.AbilityUse.BioExplosion;
-            }
-            if (typesOfAblities == Abilities.Restrain)
-            {
-                refToAbility.abilityUse = PlayerAbility.AbilityUse.Restrain;
+                refToAbility.swapped = true;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-
+        if (collision.tag == "Player")
+        {
+            refToAbility.swapped = false;
+        }
     }
 
     void Update()
@@ -48,6 +49,17 @@ public class AbilityPill : MonoBehaviour
         {
             this.transform.position = refToAbility.storage.position;
             refToAbility.occupied = true;
+        }
+        else
+        {
+            follow = false;
+        }
+
+        if (refToAbility.swapped && refToAbility.ability) {
+            refToAbility.swapped = false;
+            refToAbility.occupied = false;
+            refToAbility.abilityUse = PlayerAbility.AbilityUse.None;
+            refToAbility.ability = false;
         }
     }
 }
