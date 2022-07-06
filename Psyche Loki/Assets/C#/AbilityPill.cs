@@ -18,8 +18,6 @@ public class AbilityPill : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            //gameObject.SetActive(false);
-
             if (!refToAbility.occupied)
             {
                 follow = true;
@@ -49,6 +47,7 @@ public class AbilityPill : MonoBehaviour
         {
             this.transform.position = refToAbility.storage.position;
             refToAbility.occupied = true;
+            refToAbility.abilityStored = this.gameObject;
         }
         else
         {

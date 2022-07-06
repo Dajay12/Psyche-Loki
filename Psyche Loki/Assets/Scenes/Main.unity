@@ -245,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139348224}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.9859996, y: 3, z: 0}
+  m_LocalPosition: {x: 9.35, y: 3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1852595475}
@@ -3407,7 +3407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380566111}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.0100002, y: 3, z: 0}
+  m_LocalPosition: {x: -0.51, y: 3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1111832044}
@@ -5729,7 +5729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564811867}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.01, y: 3, z: 0}
+  m_LocalPosition: {x: -5.17, y: 3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1494902316}
@@ -7198,6 +7198,14 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 685443793}
+    - target: {fileID: 8362865056877292525, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362865056877292525, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
 --- !u!1001 &7037805185013043102

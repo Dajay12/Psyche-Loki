@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerAbility : MonoBehaviour
 {
+    private float nextFireTime = 0;
+
     public PlayerTopDown refToPlayer;
     public PlayerHealth refToHealth;
     public Transform storage;
@@ -12,22 +14,6 @@ public class PlayerAbility : MonoBehaviour
     public bool swapped;
     public bool occupied;
 
-    private float nextFireTime = 0;
-
-    [Header("Invincibility")]//Basic Version (Completed)
-    public float invincibileTime = 10;
-
-    [Header("Restrain")]//Basic Version (Completed)
-    public float restrainTime = 10;
-
-    [Header("Explosion")]//Basic Version (Completed)
-    public LayerMask layerToHit;
-    public float explodeTime;
-    public bool explosiveActivate;
-    [Range(0, 6)]
-    public float explosionRadius;
-    public float explosiveForce = 700f;
-
     private void Awake()
     {
         abilityUse = AbilityUse.None;
@@ -35,9 +21,7 @@ public class PlayerAbility : MonoBehaviour
 
     void Start()
     {
-        //invincibilityActivate = true;
-        //refToPlayer.right = true;
-
+        abNumTracker = Time.time;
     }
 
     void Update()
@@ -51,18 +35,23 @@ public class PlayerAbility : MonoBehaviour
                     break;
                 case AbilityUse.Invincibility:
                     Invincibility();
+                    num = invincibileTime;
                     break;
                 case AbilityUse.BioExplosion:
                     Explosion();
+                    num = explodeTime;
                     break;
                 case AbilityUse.Restrain:
                     Restrain();
+                    num = restrainTime;
                     break;
             }
         }
-        Debug.Log(Time.time);
+        AbilityTracker();
     }
 
+    [Header("Invincibility")]
+    public float invincibileTime = 10;
     void Invincibility()
     {
         if (abilityUse == AbilityUse.Invincibility)
@@ -71,6 +60,7 @@ public class PlayerAbility : MonoBehaviour
             {
                 if (ability == true)
                 {
+                    trackerOn = true;
                     nextFireTime = Time.time + invincibileTime;
 
                     ability = false;
@@ -88,6 +78,9 @@ public class PlayerAbility : MonoBehaviour
         }
 
     }
+    
+    [Header("Restrain")]
+    public float restrainTime = 10;
     void Restrain()
     {
         string tag = "Enemy";
@@ -99,6 +92,7 @@ public class PlayerAbility : MonoBehaviour
             {
                 if (ability == true)
                 {
+                    trackerOn = true;
                     nextFireTime = Time.time + restrainTime;
 
                     foreach (GameObject tagged in taggedObjects)
@@ -123,6 +117,15 @@ public class PlayerAbility : MonoBehaviour
             }
         }
     }
+    
+    [Header("Explosion")]
+    public float explodeTime;
+    [Range(0, 6)]
+    public float explosionRadius;
+    public float explosiveForce = 700f;
+
+    public LayerMask layerToHit;
+    public bool explosiveActivate;
     void Explosion()
     {
         Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, explosionRadius, layerToHit);
@@ -131,7 +134,9 @@ public class PlayerAbility : MonoBehaviour
         {
             if (ability == true)
             {
+                trackerOn = true;
                 nextFireTime = Time.time + explodeTime;
+
                 explosiveActivate = true;
                 ability = false;
                 GetComponent<SpriteRenderer>().color = new Vector4(1, 0, 0, 1);
@@ -157,21 +162,42 @@ public class PlayerAbility : MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
-
     public void AbilityAtivate()
     {
         if (!swapped)
         {
-            if (abilityUse != AbilityUse.None) ability = true;
+            if (abilityUse != AbilityUse.None) { 
+                ability = true;
+                abNumTracker = 0;
+            }
         }
         else if (swapped)
         {
             ability = true;
         }
+    }
+
+    public GameObject abilityStored;
+    float abNumTracker, num;
+    bool trackerOn;
+    void AbilityTracker()
+    {
+        if (trackerOn)
+        {
+            abNumTracker += Time.deltaTime;
+            if(abNumTracker > num+.1f)//10.9f)
+            {
+                trackerOn = false;
+                occupied = false;
+
+                abilityUse = AbilityUse.None;
+                Destroy(abilityStored);
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
