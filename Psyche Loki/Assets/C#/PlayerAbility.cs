@@ -50,6 +50,7 @@ public class PlayerAbility : MonoBehaviour
         AbilityTracker();
     }
 
+
     [Header("Invincibility")]
     public float invincibileTime = 10;
     void Invincibility()
@@ -65,7 +66,6 @@ public class PlayerAbility : MonoBehaviour
 
                     ability = false;
                     refToHealth.alive = false;
-                    //abilityUse = AbilityUse.None;
 
                     GetComponent<SpriteRenderer>().color = new Vector4(0, 1, 1, 1);
                 }
@@ -78,7 +78,7 @@ public class PlayerAbility : MonoBehaviour
         }
 
     }
-    
+
     [Header("Restrain")]
     public float restrainTime = 10;
     void Restrain()
@@ -102,7 +102,6 @@ public class PlayerAbility : MonoBehaviour
                     }
 
                     ability = false;
-                    //abilityUse = AbilityUse.None;
                     GetComponent<SpriteRenderer>().color = new Vector4(1, 0, 1, 1);
                 }
                 else
@@ -117,12 +116,12 @@ public class PlayerAbility : MonoBehaviour
             }
         }
     }
-    
+
     [Header("Explosion")]
     public float explodeTime;
     [Range(0, 6)]
     public float explosionRadius;
-    public float explosiveForce = 700f;
+    public float explosiveForce;
 
     public LayerMask layerToHit;
     public bool explosiveActivate;
@@ -137,7 +136,21 @@ public class PlayerAbility : MonoBehaviour
                 trackerOn = true;
                 nextFireTime = Time.time + explodeTime;
 
-                explosiveActivate = true;
+                foreach (Collider2D nearbyObjects in obstacles)
+                {
+                    Vector2 direction = nearbyObjects.transform.position - transform.position;
+                    Rigidbody2D rb = nearbyObjects.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        rb.AddForce(direction * explosiveForce);
+                    }
+                    Enemy explosiveDamage = nearbyObjects.GetComponent<Enemy>();
+                    if (explosiveDamage != null)
+                    {
+                        explosiveDamage.health -= 2;
+                    }
+                }
+
                 ability = false;
                 GetComponent<SpriteRenderer>().color = new Vector4(1, 0, 0, 1);
             }
@@ -146,27 +159,15 @@ public class PlayerAbility : MonoBehaviour
                 explosiveActivate = false;
                 GetComponent<SpriteRenderer>().color = new Vector4(0, 0, 1, 1);
             }
-
-            if (explosiveActivate == true)
-            {
-
-                foreach (Collider2D nearbyObjects in obstacles)
-                {
-                    Vector2 direction = nearbyObjects.transform.position - transform.position;
-                    nearbyObjects.GetComponent<Rigidbody2D>().AddForce(direction * explosiveForce);
-                    //Rigidbody2D rb = nearbyObjects.GetComponent<Rigidbody2D>();
-                    //if (rb != null) { }
-                }
-            }
         }
-
     }
 
     public void AbilityAtivate()
     {
         if (!swapped)
         {
-            if (abilityUse != AbilityUse.None) { 
+            if (abilityUse != AbilityUse.None)
+            {
                 ability = true;
                 abNumTracker = 0;
             }
@@ -185,7 +186,7 @@ public class PlayerAbility : MonoBehaviour
         if (trackerOn)
         {
             abNumTracker += Time.deltaTime;
-            if(abNumTracker > num+.1f)//10.9f)
+            if (abNumTracker > num + .1f)//10.9f)
             {
                 trackerOn = false;
                 occupied = false;
@@ -197,7 +198,7 @@ public class PlayerAbility : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
