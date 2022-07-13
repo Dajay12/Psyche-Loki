@@ -1,9 +1,10 @@
 using UnityEngine;
+
 public class Enemy : MonoBehaviour
 {
     public enemyMovement myMovement;
 
-    public enum EnemyType { None, Attacker, Ranger, Healer}
+    public enum EnemyType { None, Attacker, Ranger, Tank}
     public EnemyType enemyType;
 
     Transform target;
@@ -19,15 +20,6 @@ public class Enemy : MonoBehaviour
     {
         myMovement = GetComponent<enemyMovement>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
-        if(enemyType == EnemyType.Attacker)
-        {
-            myMovement.movement = enemyMovement.EnemyMovement.Attacker;
-        }
-        else if (enemyType == EnemyType.Ranger || enemyType == EnemyType.Healer)
-        {
-            myMovement.movement = enemyMovement.EnemyMovement.Ranger;
-        }
     }
 
     void Start()
@@ -37,20 +29,24 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        //Aiming
+        /*Vector2 direction = target.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);*/
+
+        //myMovement.closeCombat = true;
+
         if (enemyType == EnemyType.Attacker)
         {
             myMovement.movement = enemyMovement.EnemyMovement.Attacker;
         }
-        else if (enemyType == EnemyType.Ranger || enemyType == EnemyType.Healer)
+        else if (enemyType == EnemyType.Ranger)
         {
             myMovement.movement = enemyMovement.EnemyMovement.Ranger;
         }
 
-        //Aiming
-        Vector2 direction = target.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+        
     }
 
     public void TakeDamage(int damage)
