@@ -20,6 +20,7 @@ public class GunMechanic : MonoBehaviour
     private float fireRate = 2.5f;
     private float nextTimeToFire = 0;
     RaycastHit tap;
+    public LayerMask combatLayer;
 
 
     private void Awake()
@@ -42,7 +43,7 @@ public class GunMechanic : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * 20f, Color.green);
 
-            if (Physics.Raycast(ray, out tap, Mathf.Infinity))
+            if (Physics.Raycast(ray, out tap, Mathf.Infinity, combatLayer))
             {
                 tap2Aim = !tap2Aim;
             }

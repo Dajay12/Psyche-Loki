@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     public enemyMovement myMovement;
 
-    public enum EnemyType { None, Attacker, Ranger, Tank}
+    public enum EnemyType { None, Alerter, Attacker, Ranger, Tank}
     public EnemyType enemyType;
 
     Transform target;
@@ -39,11 +39,11 @@ public class Enemy : MonoBehaviour
 
         if (enemyType == EnemyType.Attacker)
         {
-            myMovement.movement = enemyMovement.EnemyMovement.Attacker;
+            //myMovement.movement = enemyMovement.EnemyMovement.Attacker;
         }
         else if (enemyType == EnemyType.Ranger)
         {
-            myMovement.movement = enemyMovement.EnemyMovement.Ranger;
+           // myMovement.movement = enemyMovement.EnemyMovement.Ranger;
         }
 
         

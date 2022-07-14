@@ -727,7 +727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306817709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.9, y: 0.18999988, z: -10}
+  m_LocalPosition: {x: 26.55, y: -1.2000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 233154237}
@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 492164537}
   - component: {fileID: 492164536}
   - component: {fileID: 492164535}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1026,7 +1026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2015625608}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &492164535
 SphereCollider:
@@ -1427,11 +1427,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b402517d4f055484aaa853f8a42f0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: {fileID: 0}
   movement: 0
   speed: 0
   roamTime: 0
   closeCombat: 0
-  myTiles: {fileID: 0}
 --- !u!114 &626714111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,11 +1459,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b402517d4f055484aaa853f8a42f0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: {fileID: 0}
   movement: 0
   speed: 0
   roamTime: 0
   closeCombat: 0
-  myTiles: {fileID: 0}
 --- !u!1 &645985439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,36 +1786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &711438834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 711438835}
-  m_Layer: 0
-  m_Name: Roam Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &711438835
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711438834}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2015625608}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &722123080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
@@ -1971,11 +1941,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b402517d4f055484aaa853f8a42f0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: {fileID: 0}
   movement: 0
   speed: 0
   roamTime: 0
   closeCombat: 0
-  myTiles: {fileID: 0}
 --- !u!1 &740915961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,11 +2059,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b402517d4f055484aaa853f8a42f0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: {fileID: 0}
   movement: 0
   speed: 0
   roamTime: 0
   closeCombat: 0
-  myTiles: {fileID: 0}
 --- !u!58 &740915966
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3338,7 +3308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232178130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.9, y: 0.18999988, z: -10}
+  m_LocalPosition: {x: 26.55, y: -1.2000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6549,7 +6519,7 @@ GameObject:
   - component: {fileID: 2015625610}
   - component: {fileID: 2015625609}
   - component: {fileID: 2015625612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Test gummy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -6615,10 +6585,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015625606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.87, y: -1.69, z: 0}
+  m_LocalPosition: {x: -2.32, y: -2.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 711438835}
   - {fileID: 492164534}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -6635,8 +6604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585008527eab628458df4f04b7c48b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMovement: {fileID: 0}
-  enemyType: 0
+  myMovement: {fileID: 2015625612}
+  enemyType: 1
   health: 3
 --- !u!50 &2015625610
 Rigidbody2D:
@@ -6687,11 +6656,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b402517d4f055484aaa853f8a42f0cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: {fileID: 2015625609}
   movement: 0
   speed: 2.5
   roamTime: 3
   closeCombat: 0
-  myTiles: {fileID: 1446867185}
 --- !u!1 &2027724625
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,11 +7248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.9
+      value: 26.55
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7365,6 +7334,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 685443793}
+    - target: {fileID: 8432537472389092650, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
+      propertyPath: combatLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
 --- !u!1001 &7037805185013043102
