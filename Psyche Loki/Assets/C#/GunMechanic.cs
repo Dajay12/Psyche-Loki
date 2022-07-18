@@ -19,6 +19,7 @@ public class GunMechanic : MonoBehaviour
 
     private float fireRate = 2.5f;
     private float nextTimeToFire = 0;
+
     RaycastHit tap;
     public LayerMask combatLayer;
 

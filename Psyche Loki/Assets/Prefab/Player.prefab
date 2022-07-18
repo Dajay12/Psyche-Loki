@@ -140,7 +140,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &278632872726454569
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -362,6 +362,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6826459275917608700, guid: 58edd870f1f5197489dab5bae93b07d1, type: 3}
   sphereRange: 6.8
   tap2Aim: 0
+  combatLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2527305359481062363
 GameObject:
   m_ObjectHideFlags: 0
