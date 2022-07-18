@@ -98,10 +98,7 @@ public class enemyMovement : MonoBehaviour
                 break;
             case EnemyMovement.Tank:
                 speed = 2.5f;
-                retreatDistance = 4f;
-                stoppingDistance = 5.5f;
-
-                if (Vector2.Distance(transform.position, target.position) < 10f) closeCombat = true;
+                if (Vector2.Distance(transform.position, target.position) < 4f) closeCombat = true;
                 else closeCombat = false;
 
                 if (closeCombat)
@@ -111,10 +108,12 @@ public class enemyMovement : MonoBehaviour
                 }
                 else if (!closeCombat)
                 {
+                    retreatDistance = 5f;
+                    stoppingDistance = 5.5f;
                     //Shoot Player
                     if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
                     {
-                        transform.position = transform.position;
+                        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
                     }
                     else if (Vector2.Distance(transform.position, target.position) < retreatDistance)
                     {

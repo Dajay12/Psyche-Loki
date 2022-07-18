@@ -727,7 +727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306817709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.55, y: -1.2000002, z: -10}
+  m_LocalPosition: {x: 28.99, y: -1.9400002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 233154237}
@@ -3308,7 +3308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232178130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.55, y: -1.2000002, z: -10}
+  m_LocalPosition: {x: 28.99, y: -1.9400002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6585,7 +6585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015625606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.32, y: -2.43, z: 0}
+  m_LocalPosition: {x: -1.35, y: -1.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 492164534}
@@ -6605,7 +6605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myMovement: {fileID: 2015625612}
-  enemyType: 1
+  enemyType: 4
   health: 3
 --- !u!50 &2015625610
 Rigidbody2D:
@@ -7248,11 +7248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.55
+      value: 28.99
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 278632872726454568, guid: 119f9bd8046f2ba429e64aa001c27ead, type: 3}
       propertyPath: m_LocalPosition.z
