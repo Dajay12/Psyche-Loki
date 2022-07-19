@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     Transform target;
     public Transform combatPoint;
     public LayerMask combatLayer;
+    [SerializeField] bool combatActivate;
+    [SerializeField] GameObject bulletPrefab;
 
     private float turnSpeed = 1.4f;
     private float fireRate = 2.5f;
@@ -31,7 +33,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //Aiming
-        if (myMovement.movement != enemyMovement.EnemyMovement.Roam) {
+        if (myMovement.movement != enemyMovement.EnemyMovement.Roam)
+        {
             Vector2 direction = target.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -41,27 +44,31 @@ public class Enemy : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Attacker:
-                /*Collider2D[] hit = Physics2D.OverlapCircleAll(combatPoint.position, .5f, combatLayer);
+                combatActivate = true;
+                break;
+            case EnemyType.Ranger:
                 if (Time.time >= nextTimeToFire)
                 {
                     nextTimeToFire = Time.time + 3f / fireRate;
 
-                    foreach (Collider2D player in hit)
-                    {
-                        player.GetComponent<PlayerHealth>().currentHealth -= 1;
-                        
-                        Vector2 pDirection = player.transform.position - transform.position;
-                        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-                        if (rb != null) { 
-                            rb.AddForce(pDirection * 100, ForceMode2D.Force);
-                            Debug.Log("Here");
-                        }
-                    }
-                }*/
-                break;
-            case EnemyType.Ranger:
+                    GameObject bullet = Instantiate(bulletPrefab, combatPoint.position, combatPoint.rotation);
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+                }
                 break;
             case EnemyType.Tank:
+                if (myMovement.closeCombat) combatActivate = true;
+                else if (!myMovement.closeCombat) {
+                    if (Time.time >= nextTimeToFire)
+                    {
+                        nextTimeToFire = Time.time + 3f / fireRate;
+
+                        GameObject bullet = Instantiate(bulletPrefab, combatPoint.position, combatPoint.rotation);
+                        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                        //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+                    }
+                }
+
                 break;
             case EnemyType.Alerter:
                 break;
@@ -70,21 +77,25 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Collider2D[] hit = Physics2D.OverlapCircleAll(combatPoint.position, .5f, combatLayer);
-        if (Time.time >= nextTimeToFire)
+        if (combatActivate)
         {
-            nextTimeToFire = Time.time + 3f / fireRate;
-
-            foreach (Collider2D player in hit)
+            Collider2D[] hit = Physics2D.OverlapCircleAll(combatPoint.position, .5f, combatLayer);
+            if (Time.time >= nextTimeToFire)
             {
-                player.GetComponent<PlayerHealth>().currentHealth -= 1;
+                nextTimeToFire = Time.time + 1.5f / fireRate;
 
-                Vector2 pDirection = player.transform.position - transform.position;
-                Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-                if (rb != null)
+                foreach (Collider2D player in hit)
                 {
-                    rb.AddForce(pDirection * 5000);
-                    Debug.Log("Here");
+                    player.GetComponent<PlayerHealth>().currentHealth -= 1;
+
+                    Vector2 pDirection = player.transform.position - transform.position;
+                    Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        rb.AddForce(pDirection * 5000);
+                        Debug.Log("Here");
+                    }
+                    //combatActivate = false;
                 }
             }
         }
