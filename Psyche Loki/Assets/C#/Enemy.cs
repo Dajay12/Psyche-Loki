@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,10 +21,15 @@ public class Enemy : MonoBehaviour
 
     public int health = 3;
 
+    [SerializeField]private GameObject[] spawn;
+    [SerializeField]private GameObject[] enemyDetected;
+    [SerializeField]private List<GameObject> enemyVariant;
     private void Awake()
     {
         myMovement = GetComponent<enemyMovement>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        
+        spawn = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
     void Start()
@@ -68,9 +75,14 @@ public class Enemy : MonoBehaviour
                         //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
                     }
                 }
-
                 break;
             case EnemyType.Alerter:
+                enemyDetected = GameObject.FindGameObjectsWithTag("Enemy");
+
+                if (enemyDetected.Length <= 1)
+                {
+                    Debug.Log("Here");
+                }
                 break;
         }
     }
@@ -93,12 +105,16 @@ public class Enemy : MonoBehaviour
                     if (rb != null)
                     {
                         rb.AddForce(pDirection * 5000);
-                        Debug.Log("Here");
+                        
                     }
-                    //combatActivate = false;
                 }
             }
         }
+    }
+
+    private void SpawnEnemies()
+    {
+        GameObject spawnVariants = enemyVariant[Random.Range(0, enemyVariant.Count)];
     }
 
     public void TakeDamage(int damage)
