@@ -4,7 +4,7 @@ public class AbilityPill : MonoBehaviour
 {
     [SerializeField] PlayerAbility refToAbility;
     [SerializeField] GameObject player;
-    public enum Abilities { Invicinble, BioExplosion, Restrain, None }
+    public enum Abilities { Invicinble, BioExplosion, Restrain, Clone,None }
     public Abilities typesOfAblities;
 
     public bool follow;

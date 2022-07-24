@@ -1,6 +1,5 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -21,14 +20,14 @@ public class Enemy : MonoBehaviour
 
     public int health = 3;
 
-    [SerializeField]private GameObject[] spawn;
-    [SerializeField]private GameObject[] enemyDetected;
-    [SerializeField]private List<GameObject> enemyVariant;
+    [SerializeField] private GameObject[] spawn;
+    [SerializeField] private GameObject[] enemyDetected;
+    [SerializeField] private List<GameObject> enemyVariant;
     private void Awake()
     {
         myMovement = GetComponent<enemyMovement>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        
+
         spawn = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
@@ -48,6 +47,8 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
         }
 
+        enemyDetected = GameObject.FindGameObjectsWithTag("Enemy");
+
         switch (enemyType)
         {
             case EnemyType.Attacker:
@@ -65,7 +66,8 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyType.Tank:
                 if (myMovement.closeCombat) combatActivate = true;
-                else if (!myMovement.closeCombat) {
+                else if (!myMovement.closeCombat)
+                {
                     if (Time.time >= nextTimeToFire)
                     {
                         nextTimeToFire = Time.time + 3f / fireRate;
@@ -77,11 +79,21 @@ public class Enemy : MonoBehaviour
                 }
                 break;
             case EnemyType.Alerter:
-                enemyDetected = GameObject.FindGameObjectsWithTag("Enemy");
-
-                if (enemyDetected.Length <= 1)
+                GameObject spawnVariants = enemyVariant[Random.Range(0, enemyVariant.Count + 1)];
+                if (myMovement.closeCombat)
                 {
-                    Debug.Log("Here");
+                    Instantiate(spawnVariants, spawn[0].transform);
+                    Instantiate(spawnVariants, spawn[1].transform);
+                    Instantiate(spawnVariants, spawn[2].transform);
+                    Instantiate(spawnVariants, spawn[3].transform);
+                    Instantiate(spawnVariants, spawn[4].transform);
+                }
+
+                if (enemyDetected.Length < 1)
+                {
+                    //GameObject spawnVariants = enemyVariant[Random.Range(0, enemyVariant.Count + 1)];
+
+                    Instantiate(spawnVariants, spawn[0].transform);
                 }
                 break;
         }
@@ -105,7 +117,7 @@ public class Enemy : MonoBehaviour
                     if (rb != null)
                     {
                         rb.AddForce(pDirection * 5000);
-                        
+
                     }
                 }
             }
@@ -114,7 +126,7 @@ public class Enemy : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        GameObject spawnVariants = enemyVariant[Random.Range(0, enemyVariant.Count)];
+
     }
 
     public void TakeDamage(int damage)

@@ -129,6 +129,10 @@ public class enemyMovement : MonoBehaviour
                 speed = 2.5f;
                 retreatDistance = 5f;
                 stoppingDistance = 6.5f;
+
+                if (Vector2.Distance(transform.position, target.position) < 4f) closeCombat = true;
+                else closeCombat = false;
+
                 if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
                 {
                     transform.position = transform.position;
